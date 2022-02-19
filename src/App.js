@@ -9,7 +9,7 @@ function App() {
     <div className="flex flex-col bg-gray-900 items-center text-gray-50">
       <BrowserRouter>
         <Header />
-        <div className="min-h-screen">
+        <div className="min-h-screen my-8">
           <AppRoutes />
         </div>
         <Footer />

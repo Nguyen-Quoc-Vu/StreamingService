@@ -4,7 +4,7 @@ import ShowCard from "./ShowCard";
 const CardList = ({
   description = "",
   type,
-  data = [],
+  data,
   limit = 0,
   loading,
   loadMoreBtn = true,
@@ -33,6 +33,18 @@ const CardList = ({
                     id={each.show.id}
                   />
                 );
+              case "searchShow": {
+                return (
+                  <ShowCard
+                    key={index}
+                    name={each.show.name}
+                    episode={each.show.language}
+                    thumbnail={each.show.image}
+                    id={each.show.id}
+                  />
+                );
+              }
+
               case "show":
                 return (
                   <ShowCard

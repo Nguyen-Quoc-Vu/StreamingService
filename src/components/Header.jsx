@@ -10,7 +10,7 @@ export const Header = () => {
         <Link className="cursor-pointer text-gray-200" to="/">
           Home
         </Link>
-        <Link className="cursor-pointer text-gray-200" to="/shows">
+        <Link className="cursor-pointer text-gray-200" to="/shows?page=1">
           Show
         </Link>
       </div>
