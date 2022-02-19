@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import CardList from "../../components/CardList";
+import ActiveTab from "../../components/show/ActiveTab";
 import { ShowInfo } from "../../components/show/ShowInfo";
 import { useFetch } from "../../hooks/useFetch";
 
 const ShowDetail = () => {
   const { id } = useParams();
+  const [activeTab, setActiveTab] = useState("Cast");
   const showData = useFetch(`https://api.tvmaze.com/shows/${id}`);
   const castData = useFetch(`https://api.tvmaze.com/shows/${id}/cast`);
+  const seasonData = useFetch(`https://api.tvmaze.com/shows/${id}/seasons`);
+  const imageData = useFetch(`https://api.tvmaze.com/shows/${id}/images`);
   return (
     showData.data && (
       <div className="py-2 flex justify-center px-4">
@@ -17,8 +20,11 @@ const ShowDetail = () => {
               <div className="text-5xl">{showData.data.name}</div>
               <div className="flex gap-2">
                 {showData.data.type === "Scripted" ? (
-                  showData.data.genres.map((each) => (
-                    <div className="border border-gray-400 px-2 py-1 text-sm rounded-full font-bold">
+                  showData.data.genres.map((each, index) => (
+                    <div
+                      key={index}
+                      className="border border-gray-400 px-2 py-1 text-sm rounded-full font-bold"
+                    >
                       {each}
                     </div>
                   ))
@@ -27,13 +33,6 @@ const ShowDetail = () => {
                     {showData.data.type}
                   </div>
                 )}
-              </div>
-              <div className="text-justify w-full md:w-5/5">
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: showData.data.summary,
-                  }}
-                ></p>
               </div>
             </div>
           </div>
@@ -47,18 +46,40 @@ const ShowDetail = () => {
             </div>
             <div className="text-justify w-full md:w-4/6 px-2">
               <ShowInfo {...showData.data} />
+              <div className="text-justify w-full md:w-5/5  ">
+                <div className="font-bold border-t border-gray-600 mt-2 pt-2">
+                  Description
+                </div>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: showData.data.summary,
+                  }}
+                ></p>
+              </div>
             </div>
             <div className="bg-gray-800 text-gray-500 py-2 w-full flex justify-around font-bold rounded-md my-2">
-              <div>Main Info</div>
-              <div>Episode</div>
-              <div>Season</div>
-              <div className="text-gray-100">Cast</div>
+              {["Cast", "Season", "Gallery"].map((each, index) => {
+                return (
+                  <button
+                    key={index}
+                    className={
+                      activeTab === each
+                        ? "text-gray-200 cursor-pointer font-bold"
+                        : "cursor-pointer font-semibold "
+                    }
+                    onClick={() => setActiveTab(each)}
+                  >
+                    {each}
+                  </button>
+                );
+              })}
             </div>
-            <CardList
-              data={castData.data}
-              limit={10}
-              loading={castData.loading}
-              type="cast"
+            <ActiveTab
+              activeTab={activeTab}
+              id={id}
+              castData={castData}
+              seasonData={seasonData}
+              imageData={imageData}
             />
           </div>
         </div>

@@ -5,7 +5,7 @@ import SearchBar from "./SearchBar";
 
 export const Header = () => {
   return (
-    <nav className="flex sticky z-10 top-0 w-full justify-between items-center shadow-xl bg-gray-900 font-bold text-xl text-gray-300 px-4 py-2">
+    <nav className="flex backdrop-blur-lg sticky z-10 top-0 w-full max-w-6xl justify-between items-center shadow-xl font-bold text-xl text-gray-300 px-4 py-2">
       <div className="flex gap-4 justify-center items-center">
         <Link className="cursor-pointer text-gray-200" to="/">
           Home

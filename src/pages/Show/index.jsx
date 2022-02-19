@@ -19,6 +19,8 @@ export const Show = () => {
   const [filterList, setFilterList] = useState(data);
 
   const handleBtnClick = () => {
+    console.log(totalShow);
+    console.log(filterList.length);
     if (totalShow >= filterList.length) {
       setCurrentPage((prevState) => Number(prevState) + 1);
       setTotalShow(10);

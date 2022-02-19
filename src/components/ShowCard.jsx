@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import HeartIcon from "./icons/HeartIcon";
+import NoImg from "../assets/no-img.png";
 const ShowCard = ({ thumbnail, name, episode, id }) => {
   const navigate = useNavigate();
   const handleOnCardClick = (id) => {
@@ -13,15 +14,11 @@ const ShowCard = ({ thumbnail, name, episode, id }) => {
     >
       <div className="relative h-64">
         <img
-          src={
-            thumbnail
-              ? thumbnail.medium
-              : "https://img.lovepik.com/free-png/20210924/lovepik-black-question-mark-png-image_401357217_wh1200.png"
-          }
+          src={thumbnail ? thumbnail.medium : NoImg}
           alt=""
-          className="cursor-pointer rounded-t-md w-full h-full"
+          className="cursor-pointer rounded-lg object-cover object-center w-full h-full"
         />
-        <button className="absolute bottom-2 shadow-xl border-gray-600 left-1 backdrop-blur-md shadow-lg float-right rounded-full text-blue-400 hover:text-blue-500 hover:bg-gray-600 font-semibold p-2 mt-2">
+        <button className="absolute bottom-2 border-gray-600 left-1 backdrop-blur-md shadow-lg float-right rounded-full text-blue-400 hover:text-blue-500 hover:bg-gray-600 font-semibold p-2 mt-2">
           <HeartIcon />
         </button>
       </div>
