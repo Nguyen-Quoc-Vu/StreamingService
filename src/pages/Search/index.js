@@ -5,9 +5,8 @@ import { useFetch } from "../../hooks/useFetch";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
-  const searchString = searchParams.get("q");
   const { data, loading, error } = useFetch(
-    `https://api.tvmaze.com/search/shows?q=${searchString}`
+    `https://api.tvmaze.com/search/shows?q=${searchParams.get("q")}`
   );
   return (
     data && (

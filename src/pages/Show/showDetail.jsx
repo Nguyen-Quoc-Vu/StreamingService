@@ -1,8 +1,13 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import HeartIcon from "../../components/icons/HeartIcon";
 import ActiveTab from "../../components/show/ActiveTab";
 import { ShowInfo } from "../../components/show/ShowInfo";
+import { updateUserMovieList } from "../../firebase/firebase";
 import { useFetch } from "../../hooks/useFetch";
+import { updateMyList } from "../../redux/actions/userData";
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -11,6 +16,31 @@ const ShowDetail = () => {
   const castData = useFetch(`https://api.tvmaze.com/shows/${id}/cast`);
   const seasonData = useFetch(`https://api.tvmaze.com/shows/${id}/seasons`);
   const imageData = useFetch(`https://api.tvmaze.com/shows/${id}/images`);
+  const [favorite, setFavorite] = useState(null);
+  const userData = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userData) {
+      const isFound = userData.myList.findIndex((each) => {
+        return String(each.id) === id;
+      });
+      setFavorite(isFound);
+    }
+  }, [id, userData]);
+
+  const handleOnFavClick = (myList, description, thumbnail, name, id) => {
+    const newDescription = description ? description : "";
+    if (favorite === -1) {
+      const newList = [...myList, { thumbnail, name, newDescription, id }];
+      dispatch(updateMyList(newList));
+      updateUserMovieList(userData.uid, newList);
+    } else {
+      const newList = userData.myList.filter((each) => String(each.id) !== id);
+      dispatch(updateMyList(newList));
+      updateUserMovieList(userData.uid, newList);
+    }
+  };
   return (
     showData.data && (
       <div className="py-2 flex justify-center px-4">
@@ -46,7 +76,7 @@ const ShowDetail = () => {
             </div>
             <div className="text-justify w-full md:w-4/6 px-2">
               <ShowInfo {...showData.data} />
-              <div className="text-justify w-full md:w-5/5  ">
+              <div className="text-justify w-full md:w-5/5">
                 <div className="font-bold border-t border-gray-600 mt-2 pt-2">
                   Description
                 </div>
@@ -56,6 +86,20 @@ const ShowDetail = () => {
                   }}
                 ></p>
               </div>
+              <button
+                onClick={() =>
+                  handleOnFavClick(
+                    userData.myList,
+                    showData.data.summary,
+                    showData.data.image.medium,
+                    showData.data.name,
+                    id
+                  )
+                }
+                className="w-1/2 bg-red-900 hover:bg-red-700 mt-4 py-1 rounded-full flex justify-center"
+              >
+                <HeartIcon fill={favorite !== -1 ? true : false} />
+              </button>
             </div>
             <div className="bg-gray-800 text-gray-500 py-2 w-full flex justify-around font-bold rounded-md my-2">
               {["Cast", "Season", "Gallery"].map((each, index) => {

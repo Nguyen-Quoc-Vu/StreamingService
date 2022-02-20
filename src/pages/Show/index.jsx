@@ -7,7 +7,7 @@ import { useFetch } from "../../hooks/useFetch";
 export const Show = () => {
   const [searchParams] = useSearchParams();
   const STEP = 20;
-  const params = useParams();
+
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? searchParams.get("page") : "1"
   );
@@ -19,8 +19,6 @@ export const Show = () => {
   const [filterList, setFilterList] = useState(data);
 
   const handleBtnClick = () => {
-    console.log(totalShow);
-    console.log(filterList.length);
     if (totalShow >= filterList.length) {
       setCurrentPage((prevState) => Number(prevState) + 1);
       setTotalShow(10);

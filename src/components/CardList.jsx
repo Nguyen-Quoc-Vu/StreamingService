@@ -26,7 +26,7 @@ const CardList = ({
     data && (
       <div>
         <div className="flex justify-between items-center text-xl rounded-md gap-4">
-          <div className="font-bold">
+          <div className="font-bold text-gray-400">
             {data.length !== 0 ? description : "Nothing to show"}
           </div>
           {data.length > limit && loadMoreBtn && (
@@ -48,7 +48,7 @@ const CardList = ({
                       key={index}
                       name={each.show.name}
                       episode={each.name}
-                      thumbnail={each.show.image}
+                      thumbnail={each.show.image?.medium}
                       id={each.show.id}
                     />
                   );
@@ -58,22 +58,32 @@ const CardList = ({
                       key={index}
                       name={each.show.name}
                       episode={each.show.language}
-                      thumbnail={each.show.image}
+                      thumbnail={each.show.image?.medium}
                       id={each.show.id}
                     />
                   );
                 }
-
                 case "show":
                   return (
                     <ShowCard
                       key={index}
                       name={each.name}
                       episode={""}
-                      thumbnail={each.image}
+                      thumbnail={each.image?.medium}
                       id={each.id}
                     />
                   );
+                case "myList":
+                  return (
+                    <ShowCard
+                      key={index}
+                      name={each.name}
+                      episode={""}
+                      thumbnail={each.thumbnail}
+                      id={each.id}
+                    />
+                  );
+
                 case "cast":
                   return (
                     <CastCard

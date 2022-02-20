@@ -28,7 +28,6 @@ const Filter = ({ setFilterList, allShow }) => {
       newData = newData.filter((each) => each.status === status);
     }
     if (rating !== "") {
-      console.log(rating);
       const [lowest, highest] = rating.split("-");
       console.log(lowest);
       newData = newData.filter(
@@ -39,7 +38,7 @@ const Filter = ({ setFilterList, allShow }) => {
   }, [allShow, type, rating, setFilterList, status]);
 
   return (
-    <div className="w-full shadow p-5 mb-5 rounded-lg bg-gray-800">
+    <div className="w-full  p-5 mb-5 rounded-lg backdrop-blur-sm sticky top-14 z-10 shadow">
       {/* <div className="relative">
         <div className="absolute flex items-center ml-2 h-full">
           <svg
