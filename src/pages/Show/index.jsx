@@ -35,7 +35,7 @@ export const Show = () => {
       <div className="px-4 max-w-5xl">
         <Filter setFilterList={setFilterList} allShow={data} />
         <div className="flex justify-between">
-          <div className="text-2xl font-bold">
+          <div className="text-xl font-bold">
             {filterList?.length} result(s) - Page {currentPage}
           </div>
           <div className="flex gap-4">
@@ -43,11 +43,12 @@ export const Show = () => {
               onClick={() => {
                 setCurrentPage((prevState) => Number(prevState) - 1);
               }}
-              className={Number(currentPage) === 1 ? "hidden" : ""}
+              className={Number(currentPage) === 1 ? "hidden" : "font-bold"}
             >
               Previous
             </button>
             <button
+              className="font-bold"
               onClick={() =>
                 setCurrentPage((prevState) => Number(prevState) + 1)
               }

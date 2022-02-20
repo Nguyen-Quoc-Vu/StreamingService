@@ -3,22 +3,54 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import HeartIcon from "../../components/icons/HeartIcon";
+import LikeIcon from "../../components/icons/LikeIcon";
 import ActiveTab from "../../components/show/ActiveTab";
 import { ShowInfo } from "../../components/show/ShowInfo";
-import { updateUserMovieList } from "../../firebase/firebase";
+import {
+  getLikes,
+  giveALike,
+  IsUserHasAlreadyLike,
+  updateUserMovieList,
+} from "../../firebase/firebase";
 import { useFetch } from "../../hooks/useFetch";
 import { updateMyList } from "../../redux/actions/userData";
 
 const ShowDetail = () => {
   const { id } = useParams();
+  const [favorite, setFavorite] = useState(null);
+  const [like, setLike] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
   const [activeTab, setActiveTab] = useState("Cast");
   const showData = useFetch(`https://api.tvmaze.com/shows/${id}`);
   const castData = useFetch(`https://api.tvmaze.com/shows/${id}/cast`);
   const seasonData = useFetch(`https://api.tvmaze.com/shows/${id}/seasons`);
+  const episodeData = useFetch(`https://api.tvmaze.com/shows/${id}/episodes`);
   const imageData = useFetch(`https://api.tvmaze.com/shows/${id}/images`);
-  const [favorite, setFavorite] = useState(null);
   const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
+
+  const getLikeData = async (id) => {
+    const likes = await getLikes(id);
+    let hasUserLiked = false;
+    if (likes) {
+      setLike(likes.users.length);
+      hasUserLiked = IsUserHasAlreadyLike(likes.users, userData.uid);
+    }
+    setIsLiked(hasUserLiked);
+  };
+
+  const handleLikeBtn = async () => {
+    if (userData) {
+      await giveALike(id, userData.uid);
+      getLikeData(id);
+    } else {
+      alert("Please login to use this function");
+    }
+  };
+
+  useEffect(() => {
+    getLikeData(id);
+  }, []);
 
   useEffect(() => {
     if (userData) {
@@ -96,9 +128,17 @@ const ShowDetail = () => {
                     id
                   )
                 }
-                className="w-1/2 bg-red-900 hover:bg-red-700 mt-4 py-1 rounded-full flex justify-center"
+                className={`w-full bg-red-900 hover:bg-red-700 mt-4 py-1 rounded-full flex justify-center ${
+                  !userData && "hidden"
+                }`}
               >
                 <HeartIcon fill={favorite !== -1 ? true : false} />
+              </button>{" "}
+              <button
+                onClick={() => handleLikeBtn()}
+                className={`w-full font-bold bg-blue-900 hover:bg-blue-700 mt-4 py-1 rounded-full flex justify-center items-center gap-2`}
+              >
+                <LikeIcon fill={isLiked} />({like})
               </button>
             </div>
             <div className="bg-gray-800 text-gray-500 py-2 w-full flex justify-around font-bold rounded-md my-2">

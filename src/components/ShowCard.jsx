@@ -5,6 +5,7 @@ import NoImg from "../assets/no-img.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMyList } from "../redux/actions/userData";
 import { updateUserMovieList } from "../firebase/firebase";
+import StarIcon from "./icons/StarIcon";
 const ShowCard = ({ thumbnail, name, description, id }) => {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(false);
@@ -16,9 +17,12 @@ const ShowCard = ({ thumbnail, name, description, id }) => {
   };
 
   const handleOnFavClick = (myList) => {
-    const newDescription = description ? description : "";
+    const newDescription = description ? description : "Not rate";
     if (!favorite) {
-      const newList = [...myList, { thumbnail, name, newDescription, id }];
+      const newList = [
+        ...myList,
+        { thumbnail, name, description: newDescription, id },
+      ];
       dispatch(updateMyList(newList));
       updateUserMovieList(userData.uid, newList);
       // const newList = [...myList, { thumbnail, name, description, id }];
@@ -63,7 +67,10 @@ const ShowCard = ({ thumbnail, name, description, id }) => {
         >
           {name}
         </div>
-        <div className="text-md text-gray-400">{description}</div>
+        <div className="text-md text-gray-100 font-bold flex items-center gap-1">
+          {/* <StarIcon /> */}
+          {/* {description ? description : "NA"} */}
+        </div>
       </div>
     </div>
   );

@@ -123,6 +123,57 @@ const updateUserMovieList = async (id, newList) => {
     myList: newList,
   });
 };
+
+const getLikes = async (id) => {
+  const snapShot = await getDoc(doc(db, "likes", id));
+  if (snapShot.exists()) {
+    return snapShot.data();
+  } else {
+    console.log("Data doesn't exist");
+    return null;
+  }
+};
+
+const giveALike = async (showID, userID) => {
+  const data = await getLikes(showID);
+  console.log(data);
+  if (data) {
+    if (IsUserHasAlreadyLike(data.users, userID)) {
+      // console.log("user has liked");
+      const newUserList = data.users.filter((each) => each !== userID);
+      updateLikeOfSingleShow(showID, newUserList);
+    } else {
+      const newUserList = [...data.users, userID];
+      console.log(newUserList);
+      updateLikeOfSingleShow(showID, newUserList);
+    }
+  } else {
+    console.log("movie has not been created");
+    const formatUserID = String(userID);
+    await setDoc(doc(collection(db, "likes"), showID), {
+      id: showID,
+      users: [formatUserID],
+    });
+  }
+};
+
+const IsUserHasAlreadyLike = (userList, userID) => {
+  const isFound = userList.find((each) => {
+    return each === userID;
+  });
+  if (isFound) {
+    return true;
+  }
+  return false;
+};
+
+const updateLikeOfSingleShow = async (id, newUserList) => {
+  const userRef = doc(db, "likes", id);
+  await updateDoc(userRef, {
+    users: newUserList,
+  });
+};
+
 // const updateUserMovieList = async (uid, thumbnail, name, description, id) => {
 //   const userRef = doc(db, "users", uid);
 //   updateDoc(userRef, {
@@ -145,4 +196,7 @@ export {
   logout,
   getUserData,
   updateUserMovieList,
+  getLikes,
+  giveALike,
+  IsUserHasAlreadyLike,
 };

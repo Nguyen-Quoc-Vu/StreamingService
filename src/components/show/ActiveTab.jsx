@@ -34,7 +34,7 @@ const Gallery = ({ imageData }) => {
               <div className="w-full p-1 md:p-2">
                 <img
                   alt="gallery"
-                  className="block object-cover object-center w-full h-full rounded-lg"
+                  className="cursor-pointer hover:scale-125 duration-75 block object-cover object-center w-full h-full rounded-lg"
                   src={each.resolutions.original.url}
                 />
               </div>

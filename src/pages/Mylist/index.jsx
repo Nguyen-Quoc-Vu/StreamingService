@@ -10,9 +10,9 @@ const MyList = () => {
   return userData ? (
     <div className="gap-2 px-4 max-w-5xl">
       <CardList
-        description=""
+        description="My list"
         data={userData.myList}
-        limit={10}
+        limit={100}
         type="myList"
       />
     </div>

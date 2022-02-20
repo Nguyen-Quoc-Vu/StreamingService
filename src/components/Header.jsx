@@ -2,7 +2,6 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
-import { getDatabase, ref, onValue } from "firebase/database";
 import { auth, getUserData, logout } from "../firebase/firebase";
 import { LogOutIcon } from "./icons/LogOutIcon";
 import SearchBar from "./SearchBar";
