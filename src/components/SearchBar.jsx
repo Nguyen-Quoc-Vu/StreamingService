@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SearchIcon from "./icons/Search";
+import SearchIcon from "../assets/icons/Search";
 
 const SearchBar = () => {
   const navigate = useNavigate();

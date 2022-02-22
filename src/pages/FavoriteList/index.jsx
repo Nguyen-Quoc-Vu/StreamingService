@@ -4,9 +4,8 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import CardList from "../../components/CardList";
 
-const MyList = () => {
+const FavoriteList = () => {
   const userData = useSelector((state) => state.userData);
-  console.log(userData);
   return userData ? (
     <div className="gap-2 px-4 max-w-5xl">
       <CardList
@@ -21,4 +20,4 @@ const MyList = () => {
   );
 };
 
-export default MyList;
+export default FavoriteList;

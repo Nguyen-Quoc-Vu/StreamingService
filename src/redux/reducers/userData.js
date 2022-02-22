@@ -1,9 +1,4 @@
-export const userDataReducer = (
-  state = {
-    myList: [],
-  },
-  action
-) => {
+export const userDataReducer = (state = null, action) => {
   const { payload, type } = action;
   switch (type) {
     case "SET_USER_DATA":

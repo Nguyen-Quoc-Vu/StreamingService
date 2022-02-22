@@ -19,7 +19,6 @@ import {
   collection,
   doc,
   where,
-  addDoc,
   setDoc,
   getDoc,
   updateDoc,
@@ -39,7 +38,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-// const analytics = getAnalytics(app);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -50,11 +48,16 @@ const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
-      await db.collection("users").doc(user.uid).set({
+      await setDoc(doc(collection(db, "users"), user.uid), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
+        myList: [],
+        friends: [],
+        pendingFriendRequests: [],
+        sentFriendRequests: [],
         email: user.email,
+        photoURL: user.photoURL,
       });
     }
   } catch (err) {
@@ -86,6 +89,10 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       name: name,
       authProvider: "local",
       myList: [],
+      friends: [],
+      pendingFriendRequests: [],
+      sentFriendRequests: [],
+      photoURL: user.photoURL,
       email,
     });
   } catch (err) {
@@ -173,6 +180,8 @@ const updateLikeOfSingleShow = async (id, newUserList) => {
     users: newUserList,
   });
 };
+
+//Add friend features
 
 // const updateUserMovieList = async (uid, thumbnail, name, description, id) => {
 //   const userRef = doc(db, "users", uid);

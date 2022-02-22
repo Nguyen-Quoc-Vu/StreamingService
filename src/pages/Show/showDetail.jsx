@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import HeartIcon from "../../components/icons/HeartIcon";
-import LikeIcon from "../../components/icons/LikeIcon";
+import HeartIcon from "../../assets/icons/HeartIcon";
+import LikeIcon from "../../assets/icons/LikeIcon";
 import ActiveTab from "../../components/show/ActiveTab";
 import { ShowInfo } from "../../components/show/ShowInfo";
 import {
@@ -14,6 +14,7 @@ import {
 } from "../../firebase/firebase";
 import { useFetch } from "../../hooks/useFetch";
 import { updateMyList } from "../../redux/actions/userData";
+import { SHOWS_URL } from "../../utils/constant";
 
 const ShowDetail = () => {
   const { id } = useParams();
@@ -21,11 +22,11 @@ const ShowDetail = () => {
   const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [activeTab, setActiveTab] = useState("Cast");
-  const showData = useFetch(`https://api.tvmaze.com/shows/${id}`);
-  const castData = useFetch(`https://api.tvmaze.com/shows/${id}/cast`);
-  const seasonData = useFetch(`https://api.tvmaze.com/shows/${id}/seasons`);
-  const episodeData = useFetch(`https://api.tvmaze.com/shows/${id}/episodes`);
-  const imageData = useFetch(`https://api.tvmaze.com/shows/${id}/images`);
+  const showData = useFetch(`${SHOWS_URL}/${id}`);
+  const castData = useFetch(`${SHOWS_URL}/${id}/cast`);
+  const seasonData = useFetch(`${SHOWS_URL}/${id}/seasons`);
+  const episodeData = useFetch(`${SHOWS_URL}/${id}/episodes`);
+  const imageData = useFetch(`${SHOWS_URL}/${id}/images`);
   const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
 
@@ -34,7 +35,9 @@ const ShowDetail = () => {
     let hasUserLiked = false;
     if (likes) {
       setLike(likes.users.length);
-      hasUserLiked = IsUserHasAlreadyLike(likes.users, userData.uid);
+      if (userData) {
+        hasUserLiked = IsUserHasAlreadyLike(likes.users, userData.uid);
+      }
     }
     setIsLiked(hasUserLiked);
   };

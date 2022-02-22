@@ -2,22 +2,30 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../../pages/Home";
 import { Login } from "../../pages/Login";
-import MyList from "../../pages/Mylist";
+import FavoriteList from "../../pages/FavoriteList";
+import { Profile } from "../../pages/Profile";
+import { OtherProfile } from "../../pages/Profile/OtherProfile";
 import Search from "../../pages/Search";
 import { Show } from "../../pages/Show";
 import ShowDetail from "../../pages/Show/showDetail";
 import { SignIn } from "../../pages/SignIn";
+import { useSelector } from "react-redux";
 const AppRoutes = () => {
+  const userData = useSelector((state) => state.userData);
   return (
-    <Routes>
-      <Route exact path="/" element={<Home />}></Route>
-      <Route exact path="/shows" element={<Show />}></Route>
-      <Route path="/shows/:id" element={<ShowDetail />}></Route>
-      <Route path="/search" element={<Search />}></Route>
-      <Route path="/mylist" element={<MyList />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/register" element={<SignIn />}></Route>
-    </Routes>
+    <div className="min-h-screen my-8">
+      <Routes>
+        <Route exact path="/" element={<Home />}></Route>
+        <Route exact path="/shows" element={<Show />}></Route>
+        <Route path="/shows/:id" element={<ShowDetail />}></Route>
+        <Route path="/search" element={<Search />}></Route>
+        <Route path="/mylist" element={<FavoriteList />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route exact path="/profile" element={<Profile />}></Route>
+        <Route path="/profile/:id" element={<OtherProfile />}></Route>
+        <Route path="/register" element={<SignIn />}></Route>
+      </Routes>
+    </div>
   );
 };
 

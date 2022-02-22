@@ -1,20 +1,27 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
-import { auth, getUserData, logout } from "../firebase/firebase";
-import { LogOutIcon } from "./icons/LogOutIcon";
-import SearchBar from "./SearchBar";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { auth, getUserData, logout } from "../../firebase/firebase";
+import { LogOutIcon } from "../../assets/icons/LogOutIcon";
+import SearchBar from "../SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "../redux/actions/userData";
+import { setUserData } from "../../redux/actions/userData";
+import NoImg from "../../assets/no-img.png";
 
 export const Header = () => {
   const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     let unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        getUserData(currentUser.uid).then((res) => dispatch(setUserData(res)));
+        setTimeout(() => {
+          getUserData(currentUser.uid).then(
+            (res) => res && dispatch(setUserData(res))
+          );
+        }, 1000);
+        //Wait 1000s for the async task that add data to firestore
       } else {
         dispatch(setUserData(null));
       }
@@ -27,6 +34,10 @@ export const Header = () => {
       logout();
       dispatch(setUserData(null));
     }
+  };
+
+  const onUserNameClick = () => {
+    navigate("/profile");
   };
 
   return (
@@ -44,17 +55,26 @@ export const Header = () => {
           </Link>
         )}
       </div>
-      <div className="gap-4 justify-center items-center hidden md:flex">
+      <div className="gap-4 justify-center items-center md:flex">
         <SearchBar />
         {userData ? (
-          <button
-            className="text-base font-bold bg-gray-700 text-gray-200 py-2 px-3 rounded-full flex items-center gap-2"
-            onClick={logOutBtnHandle}
-          >
-            {userData?.name ? userData.name : "Guest"}
-
-            <LogOutIcon />
-          </button>
+          <div className="text-sm font-bold bg-gray-700 text-gray-200 py-2 px-2 rounded-full flex items-center justify-between gap-2 cursor-pointer">
+            <img
+              onClick={onUserNameClick}
+              src={userData.photoURL ? userData.photoURL : NoImg}
+              alt="avatar"
+              className="rounded-full w-6 h-6"
+            />
+            {/* <div
+              className="text-green-500 hover:text-green-400 cursor-pointer"
+              onClick={onUserNameClick}
+            >
+              {userData?.name ? userData.name : "Guest"}
+            </div> */}
+            <button onClick={logOutBtnHandle}>
+              <LogOutIcon />
+            </button>
+          </div>
         ) : (
           <Link
             className="rounded-full font-bold flex justify-around items-center bg-green-800 hover:bg-green-700 px-5 py-2 text-sm"

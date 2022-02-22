@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import HeartIcon from "./icons/HeartIcon";
+import HeartIcon from "../assets/icons/HeartIcon";
 import NoImg from "../assets/no-img.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMyList } from "../redux/actions/userData";
 import { updateUserMovieList } from "../firebase/firebase";
-import StarIcon from "./icons/StarIcon";
+import StarIcon from "../assets/icons/StarIcon";
 const ShowCard = ({ thumbnail, name, description, id }) => {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(false);

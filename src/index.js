@@ -9,11 +9,9 @@ import allReducers from "./redux/reducers";
 
 const store = createStore(allReducers);
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
 
