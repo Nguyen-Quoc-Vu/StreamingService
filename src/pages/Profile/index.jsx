@@ -1,4 +1,3 @@
-import { map } from "@firebase/util";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -28,7 +27,7 @@ export const Profile = () => {
 
   const FriendTab = ({ userData }) => (
     <div className="flex flex-col gap-4">
-      <div className="font-bold text-xl">Friends</div>
+      <div className="font-bold text-2xl">Friends</div>
       <div className="grid grid-cols-2">
         {userData?.friends?.map((friendID, index) => (
           <FriendCard key={index} friendID={friendID} />
@@ -38,8 +37,8 @@ export const Profile = () => {
   );
 
   return userData ? (
-    <div className="grid grid-cols-1 gap-12 p-12 bg-gray-800 w-full rounded-lg">
-      <div className="relative flex flex-col gap-4 items-center bg-gray-700 p-12 rounded-md">
+    <div className="grid grid-cols-1 gap-12 p-12 w-full rounded-lg">
+      <div className="relative flex flex-col gap-4 items-center p-12 rounded-md">
         <Avatar />
         <Info />
       </div>

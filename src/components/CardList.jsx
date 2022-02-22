@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import UserCard from "./Shared/UserCard";
 import CastCard from "./show/CastCard";
 import ShowCard from "./ShowCard";
 const CardList = ({
@@ -89,6 +90,15 @@ const CardList = ({
                   thumbnail={each.person.image}
                   actor={each.person.name}
                   character={each.character.name}
+                />
+              );
+            case "user":
+              return (
+                <UserCard
+                  key={index}
+                  thumbnail={each.photoURL}
+                  name={each.name}
+                  id={each.uid}
                 />
               );
             default:

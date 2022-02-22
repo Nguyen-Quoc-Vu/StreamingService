@@ -10,6 +10,7 @@ import { Show } from "../../pages/Show";
 import ShowDetail from "../../pages/Show/showDetail";
 import { SignIn } from "../../pages/SignIn";
 import { useSelector } from "react-redux";
+import FindFriend from "../../pages/FindFriend";
 const AppRoutes = () => {
   const userData = useSelector((state) => state.userData);
   return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         <Route exact path="/profile" element={<Profile />}></Route>
         <Route path="/profile/:id" element={<OtherProfile />}></Route>
         <Route path="/register" element={<SignIn />}></Route>
+        <Route path="/find-friend" element={<FindFriend />}></Route>
       </Routes>
     </div>
   );

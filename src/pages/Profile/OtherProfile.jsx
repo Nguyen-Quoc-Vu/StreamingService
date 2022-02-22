@@ -60,7 +60,7 @@ export const OtherProfile = () => {
           isFriend
             ? "bg-red-700 hover:bg-red-600"
             : "bg-green-700 hover:bg-green-600"
-        } cursor-pointer w-1/2 font-bold text-center py-2 rounded-full`}
+        } cursor-pointer w-full font-bold text-center py-2 rounded-full`}
       >
         {isFriend ? "Remove friend" : "Add friend"}
       </div>
@@ -69,20 +69,18 @@ export const OtherProfile = () => {
 
   return data ? (
     <div className="grid grid-cols-1 gap-3 rounded-lg max-w-4xl px-4">
-      <div className="flex flex-col gap-4 items-center bg-gray-700 p-12 rounded-md">
+      <div className="flex flex-col gap-4 items-center p-12 rounded-md w-full">
         <Avatar />
         <Info />
       </div>
       <AddFriendButton isFriend={isFriend} />
       {isFriend && (
-        <div className="relative flex flex-col w-full pt-4">
-          <CardList
-            description="Favorite list"
-            data={data.myList}
-            limit={100}
-            type="myList"
-          />
-        </div>
+        <CardList
+          description="Favorite list"
+          data={data.myList}
+          limit={100}
+          type="myList"
+        />
       )}
     </div>
   ) : (

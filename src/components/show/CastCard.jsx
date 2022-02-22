@@ -1,14 +1,11 @@
 import React from "react";
+import NoImg from "../../assets/no-img.png";
 
 const CastCard = ({ actor, character, thumbnail }) => {
   return (
     <div className="pb-4 flex flex-col rounded-lg">
       <img
-        src={
-          thumbnail
-            ? thumbnail.medium
-            : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg"
-        }
+        src={thumbnail ? thumbnail.medium : NoImg}
         alt=""
         className="cursor-pointer rounded-t-md w-full object-cover"
       />

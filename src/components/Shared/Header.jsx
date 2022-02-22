@@ -20,7 +20,7 @@ export const Header = () => {
           getUserData(currentUser.uid).then(
             (res) => res && dispatch(setUserData(res))
           );
-        }, 1000);
+        }, 100);
         //Wait 1000s for the async task that add data to firestore
       } else {
         dispatch(setUserData(null));
@@ -54,6 +54,9 @@ export const Header = () => {
             My List
           </Link>
         )}
+        <Link className="cursor-pointer text-gray-200" to="/find-friend">
+          People
+        </Link>
       </div>
       <div className="gap-4 justify-center items-center md:flex">
         <SearchBar />

@@ -181,6 +181,12 @@ const updateLikeOfSingleShow = async (id, newUserList) => {
   });
 };
 
+export const getAllUsers = async () => {
+  const snap = await getDocs(collection(db, "users"));
+  const userList = snap.docs.map((doc) => doc.data());
+  return userList;
+};
+
 //Add friend features
 
 // const updateUserMovieList = async (uid, thumbnail, name, description, id) => {
