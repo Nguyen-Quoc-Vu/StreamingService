@@ -9,6 +9,18 @@ const SearchBar = () => {
   const handleOnClick = () => {
     navigate(`/search?q=${search}`);
   };
+  const handleInputChange = (value)=>
+  { 
+    setSearch(value);
+  }
+
+  const handleKeyPress = (key) =>
+  {
+    if(key==="Enter")
+    {
+      handleOnClick();
+    }
+  }
 
   return (
     <div className="relative mx-auto text-gray-200">
@@ -17,12 +29,14 @@ const SearchBar = () => {
         name="search"
         placeholder="Search"
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => handleInputChange(e.target.value)} 
+        onKeyPress={(e)=>handleKeyPress(e.key)}
       />
       <button
         type="submit"
         className="absolute top-1/2 right-2 transform -translate-x-1/2 -translate-y-1/2"
         onClick={handleOnClick}
+
       >
         <SearchIcon />
       </button>

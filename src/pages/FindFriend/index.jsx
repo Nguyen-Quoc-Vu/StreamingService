@@ -22,7 +22,9 @@ const FindFriend = () => {
   }, [userData]);
 
   return (
-    <CardList description="People" data={allUsers} limit={10} type="user" />
+    <div className="gap-2 px-4 max-w-5xl mx-auto">
+    <CardList description="People" data={allUsers} limit={100} type="user" />
+    </div>
   );
 };
 

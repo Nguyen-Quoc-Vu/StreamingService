@@ -32,7 +32,7 @@ export const Show = () => {
   };
   return (
     data && (
-      <div className="px-4 max-w-5xl">
+      <div className="px-4 max-w-5xl mx-auto">
         <Filter setFilterList={setFilterList} allShow={data} />
         <div className="flex justify-between">
           <div className="text-xl font-bold">

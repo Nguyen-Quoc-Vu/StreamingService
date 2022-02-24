@@ -53,7 +53,7 @@ const ShowDetail = () => {
 
   useEffect(() => {
     getLikeData(id);
-  }, []);
+  }, [getLikeData, id]);
 
   useEffect(() => {
     if (userData) {
@@ -77,7 +77,7 @@ const ShowDetail = () => {
     }
   };
   return (
-    showData.data && (
+    showData.data ? (
       <div className="py-2 flex justify-center px-4">
         <div className="max-w-5xl flex flex-col gap-2">
           <div className="flex justify-between">
@@ -171,8 +171,8 @@ const ShowDetail = () => {
           </div>
         </div>
       </div>
-    )
-  );
+    ):null
+  )
 };
 
 export default ShowDetail;

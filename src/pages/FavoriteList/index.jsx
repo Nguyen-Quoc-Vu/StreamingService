@@ -7,7 +7,7 @@ import CardList from "../../components/CardList";
 const FavoriteList = () => {
   const userData = useSelector((state) => state.userData);
   return userData ? (
-    <div className="gap-2 px-4 max-w-5xl">
+    <div className="gap-2 px-4 max-w-5xl mx-auto">
       <CardList
         description="My list"
         data={userData.myList}

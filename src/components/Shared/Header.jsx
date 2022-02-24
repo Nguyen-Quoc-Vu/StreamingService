@@ -41,7 +41,7 @@ export const Header = () => {
   };
 
   return (
-    <nav className="flex backdrop-blur-xl sticky z-10 top-0 w-full max-w-6xl justify-between items-center shadow-xl font-bold text-xl text-gray-300 px-4 py-2">
+    <nav className="flex backdrop-blur-xl sticky z-10 top-0 w-full max-w-6xl justify-between items-center font-bold text-xl text-gray-300 px-4 py-2">
       <div className="flex gap-4 justify-center items-center">
         <Link className="cursor-pointer text-gray-200" to="/">
           Home
@@ -55,7 +55,7 @@ export const Header = () => {
           </Link>
         )}
         <Link className="cursor-pointer text-gray-200" to="/find-friend">
-          People
+          Find friends
         </Link>
       </div>
       <div className="gap-4 justify-center items-center md:flex">

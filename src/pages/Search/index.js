@@ -10,7 +10,7 @@ const Search = () => {
   );
   return (
     data && (
-      <div className="px-4 max-w-5xl">
+      <div className="px-4 max-w-5xl mx-auto">
         <CardList
           description=""
           data={data}

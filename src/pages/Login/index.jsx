@@ -17,10 +17,19 @@ export const Login = () => {
     if (user) navigate("/");
   }, [user, navigate]);
 
+  const handleEnterPress = (key) =>
+  {
+    console.log(key)
+    if(key==="Enter")
+    {
+      logInWithEmailAndPassword(email, password);
+    }
+  }
+
   return loading ? (
     <div>loading</div>
   ) : (
-    <div className="flex justify-center items-center mt-24">
+    <div className="gap-2 px-4 max-w-sm mt-24 mx-auto">
       <div className="w-full">
         <form className="bg-gray-800 shadow-md rounded px-16 pt-6 pb-10 mb-6">
           <div className="mb-4">
@@ -36,6 +45,7 @@ export const Login = () => {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={(e)=>handleEnterPress(e.key)}
             />
           </div>
           <div className="mb-4">
@@ -51,6 +61,7 @@ export const Login = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={(e)=>handleEnterPress(e.key)}
             />
             <p className="text-red-500 text-xs italic">{errorMessage}</p>
           </div>

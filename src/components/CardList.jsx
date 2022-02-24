@@ -23,9 +23,15 @@ const CardList = ({
     setNumberOfCard(limit);
   }, [limit]);
 
+  const LoadingCard = ()=> (<div className="bg-gray-700 rounded-md h-64"></div>)
+ 
+  
+ 
+  
+
   return data ? (
     <div>
-      <div className="flex justify-between items-center text-xl rounded-md gap-4">
+      <div className="flex justify-between items-center text-2xl rounded-md gap-4">
         <div className="font-bold text-gray-200">
           {data.length !== 0 ? description : "Nothing to show"}
         </div>
@@ -108,7 +114,12 @@ const CardList = ({
       </div>
     </div>
   ) : (
-    <div></div>
+    <div>
+      <div className="w-1/5 h-10 mb-4 rounded-md bg-gray-700"></div>
+      <div className="min-w-full grid gap-4 grid-cols-5 mb-4 animate-pulse">
+        {[1,2,3,4,5,6,7,8,9,10].map((x,i)=><LoadingCard/>)}
+      </div>
+    </div>
   );
 };
 

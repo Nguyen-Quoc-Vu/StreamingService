@@ -26,7 +26,7 @@ export const SignIn = () => {
     if (user) navigate("/");
   }, [user, loading]);
   return (
-    <div className="flex justify-center items-center mt-24">
+    <div className="gap-2 px-4 max-w-sm pt-24 mx-auto">
       <div className="w-full">
         <form className="bg-gray-800 shadow-md rounded px-16 pt-6 pb-10 mb-6">
           <div className="mb-4">

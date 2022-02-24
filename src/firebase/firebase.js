@@ -187,7 +187,26 @@ export const getAllUsers = async () => {
   return userList;
 };
 
-//Add friend features
+export const updateSentRequests = async (newData, userID) => {
+  const ref = doc(db, "users", userID);
+  await updateDoc(ref, {
+    sentFriendRequests: newData,
+  });
+};
+
+export const updatePendingFriendRequests = async (newData, userID) => {
+  const ref = doc(db, "users", userID);
+  await updateDoc(ref, {
+    pendingFriendRequests: newData,
+  });
+};
+
+export const updateFriendList = async (newData, userID) => {
+  const ref = doc(db, "users", userID);
+  await updateDoc(ref, {
+    friends: newData,
+  });
+};
 
 // const updateUserMovieList = async (uid, thumbnail, name, description, id) => {
 //   const userRef = doc(db, "users", uid);

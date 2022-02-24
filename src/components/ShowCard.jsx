@@ -5,7 +5,6 @@ import NoImg from "../assets/no-img.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMyList } from "../redux/actions/userData";
 import { updateUserMovieList } from "../firebase/firebase";
-import StarIcon from "../assets/icons/StarIcon";
 const ShowCard = ({ thumbnail, name, description, id }) => {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(false);
@@ -43,12 +42,12 @@ const ShowCard = ({ thumbnail, name, description, id }) => {
   }, [id, userData]);
 
   return (
-    <div className="pb-4 flex flex-col rounded-lg">
+    <div className="pb-4 flex flex-col rounded-lg hover:scale-110 duration-100">
       <div className="relative h-64">
         <img
           src={thumbnail ? thumbnail : NoImg}
           alt=""
-          className="cursor-pointer rounded-lg object-cover object-center w-full h-full"
+          className="cursor-pointer rounded-lg object-cover object-center w-full h-full bg-gray-700"
           onClick={() => handleOnCardClick(id)}
         />
         {userData && (

@@ -3,11 +3,11 @@ import NoImg from "../../assets/no-img.png";
 
 const CastCard = ({ actor, character, thumbnail }) => {
   return (
-    <div className="pb-4 flex flex-col rounded-lg">
+    <div className="pb-4 flex flex-col rounded-lg hover:scale-110 duration-100">
       <img
         src={thumbnail ? thumbnail.medium : NoImg}
         alt=""
-        className="cursor-pointer rounded-t-md w-full object-cover"
+        className="cursor-pointer rounded-t-md w-full h-48 object-cover"
       />
       <div className="relative text-left px-3 pt-2 cursor-pointer">
         <div className="text-xl font-bold">{actor}</div>
