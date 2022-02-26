@@ -5,6 +5,7 @@ import NoImg from "../assets/no-img.png";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMyList } from "../redux/actions/userData";
 import { updateUserMovieList } from "../firebase/firebase";
+import StarIcon from "../assets/icons/StarIcon";
 const ShowCard = ({ thumbnail, name, description, id }) => {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(false);
@@ -66,10 +67,9 @@ const ShowCard = ({ thumbnail, name, description, id }) => {
         >
           {name}
         </div>
-        <div className="text-md text-gray-100 font-bold flex items-center gap-1">
-          {/* <StarIcon /> */}
-          {/* {description ? description : "NA"} */}
-        </div>
+        {/* <div className="text-md text-gray-400 text-sm font-bold  items-center gap-1 hover:flex hidden">
+          <StarIcon /> {description ? `(${description})` : "(Not rate)"}
+        </div> */}
       </div>
     </div>
   );

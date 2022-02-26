@@ -23,21 +23,17 @@ const CardList = ({
     setNumberOfCard(limit);
   }, [limit]);
 
-  const LoadingCard = ()=> (<div className="bg-gray-700 rounded-md h-64"></div>)
- 
-  
- 
-  
+  const LoadingCard = () => <div className="bg-gray-700 rounded-md h-64"></div>;
 
   return data ? (
     <div>
       <div className="flex justify-between items-center text-2xl rounded-md gap-4">
-        <div className="font-bold text-gray-200">
+        <div className="font-bold text-gray-200 border-l-8 pl-2 border-yellow-400">
           {data.length !== 0 ? description : "Nothing to show"}
         </div>
         {data.length > limit && loadMoreBtn && (
           <button
-            className="text-sm font-semibold border-2 border-gray-700 px-8 py-1 rounded-full"
+            className="text-sm font-semibold border-2 border-gray-200 px-8 py-1 rounded-full"
             onClick={handleBtnClick}
           >
             More
@@ -117,7 +113,9 @@ const CardList = ({
     <div>
       <div className="w-1/5 h-10 mb-4 rounded-md bg-gray-700"></div>
       <div className="min-w-full grid gap-4 grid-cols-5 mb-4 animate-pulse">
-        {[1,2,3,4,5,6,7,8,9,10].map((x,i)=><LoadingCard/>)}
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x, i) => (
+          <LoadingCard />
+        ))}
       </div>
     </div>
   );

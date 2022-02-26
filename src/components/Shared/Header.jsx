@@ -41,8 +41,8 @@ export const Header = () => {
   };
 
   return (
-    <nav className="flex backdrop-blur-xl sticky z-10 top-0 w-full max-w-6xl justify-between items-center font-bold text-xl text-gray-300 px-4 py-2">
-      <div className="flex gap-4 justify-center items-center">
+    <nav className="flex flex-col md:flex-row gap-4 backdrop-blur-xl sticky z-10 top-0 w-full border-b border-gray-700 justify-between items-center font-bold text-xl text-gray-300 px-4 py-4">
+      <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
         <Link className="cursor-pointer text-gray-200" to="/">
           Home
         </Link>
@@ -58,7 +58,7 @@ export const Header = () => {
           Find friends
         </Link>
       </div>
-      <div className="gap-4 justify-center items-center md:flex">
+      <div className="gap-4 justify-center items-center flex md:flex-row flex-col">
         <SearchBar />
         {userData ? (
           <div className="text-sm font-bold bg-gray-700 text-gray-200 py-2 px-2 rounded-full flex items-center justify-between gap-2 cursor-pointer">

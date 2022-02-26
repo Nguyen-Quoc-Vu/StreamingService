@@ -9,7 +9,7 @@ export const Profile = () => {
   const userData = useSelector((state) => state.userData);
 
   const Avatar = () => (
-    <div className="w-32 h-32 flex m-3text-white">
+    <div className="w-28 h-28 flex m-3text-white">
       <img
         className="p-1 rounded-full object-cover border-4"
         src={userData.photoURL ? userData.photoURL : NoImg}
@@ -28,7 +28,9 @@ export const Profile = () => {
 
   const FriendTab = ({ userData }) => (
     <div className="flex flex-col gap-4">
-      <div className="font-bold text-2xl">Friends ({userData.friends.length})</div>
+      <div className="font-bold text-2xl">
+        Friends ({userData.friends.length})
+      </div>
       <div className="grid grid-cols-5">
         {userData?.friends?.map((friendID, index) => {
           return <FriendCard key={index} friendID={friendID} />;
@@ -39,7 +41,9 @@ export const Profile = () => {
 
   const FavoriteTab = ({ userData }) => (
     <div className="flex flex-col gap-4">
-      <div className="font-bold text-2xl">Favorite list ({userData.myList.length})</div>
+      <div className="font-bold text-2xl">
+        Favorite list ({userData.myList.length})
+      </div>
       <CardList
         description=""
         data={userData.myList}
@@ -51,14 +55,19 @@ export const Profile = () => {
 
   return userData ? (
     <div className="gap-2 px-4 max-w-5xl mx-auto">
-      <div className="relative flex flex-col gap-4 items-center p-12 rounded-md">
+      <div className="relative flex flex-col gap-4 items-center rounded-md backdrop-blur-xl pb-12">
+        <img
+          src={userData.photoURL ? userData.photoURL : NoImg}
+          alt="cover"
+          className="absolute w-full h-full object-cover blur object-middle brightness-50 -z-10"
+        />
         <Avatar />
         <Info />
       </div>
-      <div className="relative flex flex-col gap-8">
+      <div className="relative flex flex-col gap-8 py-12">
         <FriendTab userData={userData} />
-        <FavoriteTab userData={userData}/>
-      </div> 
+        <FavoriteTab userData={userData} />
+      </div>
     </div>
   ) : null;
 };

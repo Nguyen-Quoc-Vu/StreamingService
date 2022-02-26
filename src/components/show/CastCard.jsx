@@ -7,7 +7,7 @@ const CastCard = ({ actor, character, thumbnail }) => {
       <img
         src={thumbnail ? thumbnail.medium : NoImg}
         alt=""
-        className="cursor-pointer rounded-t-md w-full h-48 object-cover"
+        className="cursor-pointer rounded-t-md w-full h-60 object-cover"
       />
       <div className="relative text-left px-3 pt-2 cursor-pointer">
         <div className="text-xl font-bold">{actor}</div>
