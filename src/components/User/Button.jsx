@@ -3,16 +3,15 @@ import {
   addFriendOnFirebase,
   removeFriendOnFirebase,
   unsentFriendRequestOnFirebase,
+  DeclineFriendRequestOnFirebase,
 } from "../../utils/friend";
 import { useDispatch } from "react-redux";
 import {
-  acceptFriendRequest,
   addToFriendList,
   addToSentRequestList,
   removeFriend,
   removeFromReceivedRequestList,
   removeFromSentRequestList,
-  unsentFriendRequest,
 } from "../../redux/actions/userData";
 import { RELATION } from "../../utils/constant";
 
@@ -42,6 +41,15 @@ const Button = ({ relation, adminUID, userUID }) => {
     try {
       await unsentFriendRequestOnFirebase(receiverUID, adminUID);
       dispatch(removeFromSentRequestList(receiverUID));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onRemoveFriendRequest = async (adminUID, senderUID) => {
+    try {
+      await DeclineFriendRequestOnFirebase(senderUID, adminUID);
+      dispatch(removeFromReceivedRequestList(senderUID));
     } catch (e) {
       console.log(e);
     }
@@ -84,7 +92,10 @@ const Button = ({ relation, adminUID, userUID }) => {
           >
             Accept
           </div>
-          <div className="w-1/2 bg-red-700 hover:bg-red-600 py-2 text-center rounded-full cursor-pointer">
+          <div
+            onClick={() => onRemoveFriendRequest(adminUID, userUID)}
+            className="w-1/2 bg-red-700 hover:bg-red-600 py-2 text-center rounded-full cursor-pointer"
+          >
             Remove
           </div>
         </div>

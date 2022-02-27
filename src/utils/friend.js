@@ -57,7 +57,7 @@ export const removeFriendOnFirebase = async (senderID, receiverID) => {
   updateFriendList(newReceiverFriendList, receiverID);
 };
 
-//Remove sentfriend request
+//Remove sent friend request
 
 export const unsentFriendRequestOnFirebase = async (senderID, receiverID) => {
   const senderData = await getUserData(senderID);
@@ -75,6 +75,20 @@ export const unsentFriendRequestOnFirebase = async (senderID, receiverID) => {
 };
 
 //Decline request from others
+export const DeclineFriendRequestOnFirebase = async (senderID, receiverID) => {
+  const senderData = await getUserData(senderID);
+  const receiverData = await getUserData(receiverID);
+
+  const newSenderSentRequests = senderData.sentFriendRequests.filter(
+    (request) => request !== receiverID
+  );
+  const newReceiverPendingRequests = receiverData.pendingFriendRequests.filter(
+    (request) => request !== senderID
+  );
+
+  updateSentRequests(newSenderSentRequests, senderID);
+  updatePendingFriendRequests(newReceiverPendingRequests, receiverID);
+};
 
 export const isFriend = (admin, userUID) => {
   const isFound = admin.friends.find((friendID) => {
