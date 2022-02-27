@@ -50,7 +50,9 @@ const ShowDetail = () => {
       alert("Please login to use this function");
     }
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     getLikeData(id);
   }, [getLikeData, id]);
@@ -77,7 +79,7 @@ const ShowDetail = () => {
     }
   };
   return showData.data ? (
-    <div className="py-2 flex justify-center px-4">
+    <div className="pb-2 flex justify-center px-4">
       <img
         src={showData.data.image.medium}
         alt="cover"
@@ -159,7 +161,7 @@ const ShowDetail = () => {
                   className={
                     activeTab === each
                       ? "text-gray-100 text-xl cursor-pointer font-bold"
-                      : "cursor-pointer font-semibold text-gray-400"
+                      : "cursor-pointer font-semibold text-gray-400 hover:text-gray-300 duration-100"
                   }
                   onClick={() => setActiveTab(each)}
                 >

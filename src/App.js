@@ -9,7 +9,7 @@ function App() {
     <div className="flex flex-col bg-gray-900 items-center text-gray-50">
       <BrowserRouter>
         <Header />
-          <AppRoutes />
+        <AppRoutes />
         <Footer />
       </BrowserRouter>
     </div>

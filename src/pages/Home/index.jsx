@@ -10,7 +10,7 @@ const Home = () => {
     SCHEDULE_URL + `?date=${getYesterdayDate()}`
   );
   return (
-    <div className="gap-2 px-4 max-w-5xl mx-auto">
+    <div className="flex flex-col gap-8 px-4 max-w-5xl mx-auto">
       <CardList
         description="Popular shows airing tonight"
         data={scheduleData.data}

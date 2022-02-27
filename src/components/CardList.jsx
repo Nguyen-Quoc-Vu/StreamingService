@@ -23,24 +23,22 @@ const CardList = ({
     setNumberOfCard(limit);
   }, [limit]);
 
-  const LoadingCard = () => <div className="bg-gray-700 rounded-md h-64"></div>;
+  const LoadingCard = ({ type }) => (
+    <div
+      className={`bg-gray-700 ${
+        type === `user` ? `rounded-full h-40 w-40` : `rounded-sm h-64`
+      } `}
+    ></div>
+  );
 
   return data ? (
-    <div>
-      <div className="flex justify-between items-center text-2xl rounded-md gap-4">
+    <div className="flex  justify-center flex-col gap-4">
+      <div className="flex justify-between items-center text-2xl rounded-md gap-4 ">
         <div className="font-bold text-gray-200 border-l-8 pl-2 border-yellow-400">
           {data.length !== 0 ? description : "Nothing to show"}
         </div>
-        {data.length > limit && loadMoreBtn && (
-          <button
-            className="text-sm font-semibold border-2 border-gray-200 px-8 py-1 rounded-full"
-            onClick={handleBtnClick}
-          >
-            More
-          </button>
-        )}
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-4 pt-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
         {data.slice(0, numberOfCard).map((each, index) => {
           switch (type) {
             case "scheduleShow":
@@ -108,13 +106,22 @@ const CardList = ({
           }
         })}
       </div>
+      {console.log(data.length, numberOfCard)}
+      {data.length > numberOfCard && loadMoreBtn && (
+        <button
+          className="text-sm font-semibold border-2 border-gray-200 hover:bg-gray-700 w-1/2 px-8 py-2 rounded-full self-center"
+          onClick={handleBtnClick}
+        >
+          Load More
+        </button>
+      )}
     </div>
   ) : (
     <div>
-      <div className="w-1/5 h-10 mb-4 rounded-md bg-gray-700"></div>
+      <div className="w-2/6 h-10 mb-4 rounded-md bg-gray-700"></div>
       <div className="min-w-full grid gap-4 grid-cols-5 mb-4 animate-pulse">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((x, i) => (
-          <LoadingCard />
+          <LoadingCard type={type} key={i} />
         ))}
       </div>
     </div>

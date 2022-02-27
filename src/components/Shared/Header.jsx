@@ -8,9 +8,11 @@ import SearchBar from "../SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../redux/actions/userData";
 import NoImg from "../../assets/no-img.png";
+import MenuIcon from "../../assets/icons/MenuIcon";
 
 export const Header = () => {
   const userData = useSelector((state) => state.userData);
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -41,61 +43,85 @@ export const Header = () => {
   };
 
   return (
-    <nav className="flex flex-col md:flex-row gap-4 backdrop-blur-xl sticky z-10 top-0 w-full border-b border-gray-700 justify-between items-center font-bold text-xl text-gray-300 px-4 py-4">
-      <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-        <Link className="cursor-pointer text-gray-200" to="/">
-          Home
-        </Link>
-        <Link className="cursor-pointer text-gray-200" to="/shows?page=1">
-          Show
-        </Link>
+    <div className="w-full sticky z-10 backdrop-blur-xl top-0  border-b border-gray-700">
+      <div className="h-16 md:hidden flex items-center justify-between px-6">
+        <button onClick={() => setIsOpen((state) => !state)}>
+          <MenuIcon />
+        </button>
         {userData && (
-          <Link className="cursor-pointer text-gray-200" to="/mylist">
-            My List
-          </Link>
+          <img
+            onClick={onUserNameClick}
+            src={userData.photoURL ? userData.photoURL : NoImg}
+            alt="avatar"
+            className="rounded-full w-7 h-7 border-2 cursor-pointer"
+          />
         )}
-        <Link className="cursor-pointer text-gray-200" to="/find-friend">
-          Find friends
-        </Link>
       </div>
-      <div className="gap-4 justify-center items-center flex md:flex-row flex-col">
-        <SearchBar />
-        {userData ? (
-          <div className="text-sm font-bold bg-gray-700 text-gray-200 py-2 px-2 rounded-full flex items-center justify-between gap-2 cursor-pointer">
-            <img
-              onClick={onUserNameClick}
-              src={userData.photoURL ? userData.photoURL : NoImg}
-              alt="avatar"
-              className="rounded-full w-6 h-6"
-            />
-            {/* <div
-              className="text-green-500 hover:text-green-400 cursor-pointer"
-              onClick={onUserNameClick}
-            >
-              {userData?.name ? userData.name : "Guest"}
-            </div> */}
-            <button onClick={logOutBtnHandle}>
-              <LogOutIcon />
-            </button>
-          </div>
-        ) : (
+      <nav
+        className={`${
+          isOpen ? "flex" : "hidden"
+        } md:flex flex-col md:flex-row gap-4 duration-75 w-full justify-between items-center font-bold text-xl text-gray-300 px-4 py-4`}
+      >
+        <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
           <Link
-            className="rounded-full font-bold flex justify-around items-center bg-green-800 hover:bg-green-700 px-5 py-2 text-sm"
-            to="/login"
+            className="cursor-pointer text-gray-200"
+            to="/"
+            onClick={() => setIsOpen(false)}
           >
-            Login
+            Home
           </Link>
-        )}
-      </div>
-      {/* <div className="gap-4 justify-center items-center md:hidden flex">
-        <SearchIcon />
-        <Link
-          className="rounded-full font-bold flex justify-around items-center bg-green-800 hover:bg-green-700 px-5 py-2 text-sm"
-          to="/login"
+          <Link
+            className="cursor-pointer text-gray-200"
+            to="/shows?page=1"
+            onClick={() => setIsOpen(false)}
+          >
+            Show
+          </Link>
+          {userData && (
+            <Link
+              className="cursor-pointer text-gray-200"
+              to="/mylist"
+              onClick={() => setIsOpen(false)}
+            >
+              My List
+            </Link>
+          )}
+          <Link
+            className="cursor-pointer text-gray-200"
+            to="/find-friend"
+            onClick={() => setIsOpen(false)}
+          >
+            Find friends
+          </Link>
+        </div>
+        <div
+          className="gap-4 justify-center items-center flex md:flex-row flex-col"
+          onClick={() => setIsOpen(false)}
         >
-          Login
-        </Link>
-      </div> */}
-    </nav>
+          <SearchBar />
+          {userData ? (
+            <div className="text-sm font-bold bg-opacity-50 bg-gray-600 text-gray-100 py-2 px-2 rounded-full flex items-center justify-between gap-2 cursor-pointer">
+              <img
+                onClick={onUserNameClick}
+                src={userData.photoURL ? userData.photoURL : NoImg}
+                alt="avatar"
+                className="rounded-full w-6 h-6"
+              />
+              <div>{userData.name}</div>
+              <button onClick={logOutBtnHandle}>
+                <LogOutIcon />
+              </button>
+            </div>
+          ) : (
+            <Link
+              className="rounded-full font-bold flex justify-around items-center bg-opacity-50 bg-green-800 hover:bg-green-700 px-5 py-2 text-sm"
+              to="/login"
+            >
+              Login
+            </Link>
+          )}
+        </div>
+      </nav>
+    </div>
   );
 };

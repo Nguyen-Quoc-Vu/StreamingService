@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import CardList from "../../components/CardList";
 import Filter from "../../components/Filter";
@@ -8,6 +8,9 @@ export const Show = () => {
   const [searchParams] = useSearchParams();
   const STEP = 20;
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? searchParams.get("page") : "1"
   );

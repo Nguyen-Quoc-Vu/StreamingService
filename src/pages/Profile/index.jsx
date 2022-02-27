@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import NoImg from "../../assets/no-img.png";
 import CardList from "../../components/CardList";
 import FriendCard from "../../components/Profile/FriendCard";
 
 export const Profile = () => {
   const userData = useSelector((state) => state.userData);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const Avatar = () => (
     <div className="w-28 h-28 flex m-3text-white">
@@ -28,7 +31,7 @@ export const Profile = () => {
 
   const FriendTab = ({ userData }) => (
     <div className="flex flex-col gap-4">
-      <div className="font-bold text-2xl">
+      <div className="font-bold text-2xl border-l-8 border-yellow-500 pl-4">
         Friends ({userData.friends.length})
       </div>
       <div className="grid grid-cols-5">
@@ -39,9 +42,22 @@ export const Profile = () => {
     </div>
   );
 
+  const FriendRequestTab = ({ userData }) => (
+    <div className="flex flex-col gap-4">
+      <div className="font-bold text-2xl border-l-8 border-yellow-500 pl-4">
+        Friend Requests ({userData.pendingFriendRequests.length})
+      </div>
+      <div className="grid grid-cols-5">
+        {userData?.pendingFriendRequests?.map((friendID, index) => {
+          return <FriendCard key={index} friendID={friendID} />;
+        })}
+      </div>
+    </div>
+  );
+
   const FavoriteTab = ({ userData }) => (
     <div className="flex flex-col gap-4">
-      <div className="font-bold text-2xl">
+      <div className="font-bold text-2xl border-l-8 border-yellow-500 pl-4">
         Favorite list ({userData.myList.length})
       </div>
       <CardList
@@ -66,6 +82,7 @@ export const Profile = () => {
       </div>
       <div className="relative flex flex-col gap-8 py-12">
         <FriendTab userData={userData} />
+        <FriendRequestTab userData={userData} />
         <FavoriteTab userData={userData} />
       </div>
     </div>

@@ -29,6 +29,7 @@ const User = () => {
 
   useEffect(() => {
     fetchData();
+    window.scrollTo(0, 0);
   }, [fetchData, id]);
 
   useEffect(() => {
