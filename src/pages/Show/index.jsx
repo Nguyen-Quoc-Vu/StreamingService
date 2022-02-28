@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import CardList from "../../components/CardList";
+import { useSearchParams } from "react-router-dom";
+import CardList from "../../components/Shared/CardList";
 import Filter from "../../components/Filter";
 import { useFetch } from "../../hooks/useFetch";
 
@@ -11,6 +11,7 @@ export const Show = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? searchParams.get("page") : "1"
   );

@@ -143,10 +143,8 @@ const getLikes = async (id) => {
 
 const giveALike = async (showID, userID) => {
   const data = await getLikes(showID);
-  console.log(data);
   if (data) {
     if (IsUserHasAlreadyLike(data.users, userID)) {
-      // console.log("user has liked");
       const newUserList = data.users.filter((each) => each !== userID);
       updateLikeOfSingleShow(showID, newUserList);
     } else {

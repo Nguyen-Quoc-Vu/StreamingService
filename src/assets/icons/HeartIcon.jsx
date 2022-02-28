@@ -3,7 +3,7 @@ import React from "react";
 const HeartIcon = ({ fill }) => {
   return (
     <svg
-      className={`h-7 w-7 text-red-500`}
+      className={`h-7 w-7 text-red-500 hover:animate-pulse duration-500`}
       width="24"
       height="24"
       viewBox="0 0 24 24"

@@ -1,14 +1,13 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, getUserData, logout } from "../../firebase/firebase";
 import { LogOutIcon } from "../../assets/icons/LogOutIcon";
-import SearchBar from "../SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../../redux/actions/userData";
 import NoImg from "../../assets/no-img.png";
 import MenuIcon from "../../assets/icons/MenuIcon";
+import SearchBar from "./SearchBar";
 
 export const Header = () => {
   const userData = useSelector((state) => state.userData);
@@ -43,7 +42,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="w-full sticky z-10 backdrop-blur-xl top-0  border-b border-gray-700">
+    <div className="w-full sticky z-10 backdrop-blur-xl top-0  border-b border-gray-700 mb-8">
       <div className="h-16 md:hidden flex items-center justify-between px-6">
         <button onClick={() => setIsOpen((state) => !state)}>
           <MenuIcon />

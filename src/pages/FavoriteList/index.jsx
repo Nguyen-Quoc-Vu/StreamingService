@@ -1,8 +1,7 @@
-import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import CardList from "../../components/CardList";
+import CardList from "../../components/Shared/CardList";
 
 const FavoriteList = () => {
   const userData = useSelector((state) => state.userData);

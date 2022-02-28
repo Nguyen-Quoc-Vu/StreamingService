@@ -1,9 +1,16 @@
-import React, { useEffect } from "react";
-import { useFetch } from "../../hooks/useFetch";
-import CardList from "../CardList";
+import React from "react";
+
+import CardList from "../Shared/CardList";
 import noImg from "../../assets/no-img.png";
 
-const ActiveTab = ({ id, activeTab, castData, imageData, seasonData }) => {
+const ActiveTab = ({
+  id,
+  activeTab,
+  castData,
+  imageData,
+  seasonData,
+  episodeData,
+}) => {
   switch (activeTab) {
     case "Cast":
       return (
@@ -18,7 +25,7 @@ const ActiveTab = ({ id, activeTab, castData, imageData, seasonData }) => {
     case "Gallery":
       return <Gallery imageData={imageData.data} />;
     case "Season":
-      return <Season seasonData={seasonData.data} />;
+      return <Season seasonData={seasonData.data} episodeData={episodeData} />;
     default:
       return null;
   }
@@ -46,7 +53,8 @@ const Gallery = ({ imageData }) => {
   );
 };
 
-const Season = ({ seasonData }) => {
+const Season = ({ seasonData, episodeData }) => {
+  console.log(seasonData);
   return (
     seasonData && (
       <div className="w-full">
@@ -60,9 +68,20 @@ const Season = ({ seasonData }) => {
               className="block object-cover object-center w-1/6 rounded-lg"
               src={each.image?.medium ? each.image.medium : noImg}
             />
-            <div className="flex flex-col align-center">
+            <div className="flex flex-col align-center gap-2">
               <div className="font-semibold text-2xl">Season {each.number}</div>
-              <div>{each.network?.name}</div>
+              <div>
+                <span className="font-bold">Premiere date: </span>
+                {each.premiereDate}
+              </div>
+              <div>
+                <span className="font-bold">End date: </span>
+                {each.endDate}
+              </div>
+              <div>
+                <span className="font-bold">Network: </span>
+                {each.network?.name}
+              </div>
             </div>
           </div>
         ))}

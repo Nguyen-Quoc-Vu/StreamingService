@@ -3,11 +3,11 @@ import React from "react";
 const MenuIcon = () => {
   return (
     <svg
-      class="h-7 w-7 text-white-500"
+      className="h-7 w-7 text-white-500"
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke="currentColor"
       fill="none"
       strokeLinecap="round"

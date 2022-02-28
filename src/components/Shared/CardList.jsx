@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import UserCard from "./Shared/UserCard";
-import CastCard from "./show/CastCard";
+import CastCard from "../show/CastCard";
 import ShowCard from "./ShowCard";
+import UserCard from "./UserCard";
 const CardList = ({
   description = "",
   type,

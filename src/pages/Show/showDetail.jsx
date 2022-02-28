@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HeartIcon from "../../assets/icons/HeartIcon";
 import LikeIcon from "../../assets/icons/LikeIcon";
 import ActiveTab from "../../components/show/ActiveTab";
@@ -30,17 +30,20 @@ const ShowDetail = () => {
   const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
 
-  const getLikeData = async (id) => {
-    const likes = await getLikes(id);
-    let hasUserLiked = false;
-    if (likes) {
-      setLike(likes.users.length);
-      if (userData) {
-        hasUserLiked = IsUserHasAlreadyLike(likes.users, userData.uid);
+  const getLikeData = useCallback(
+    async (id) => {
+      const likes = await getLikes(id);
+      let hasUserLiked = false;
+      if (likes) {
+        setLike(likes.users.length);
+        if (userData) {
+          hasUserLiked = IsUserHasAlreadyLike(likes.users, userData.uid);
+        }
       }
-    }
-    setIsLiked(hasUserLiked);
-  };
+      setIsLiked(hasUserLiked);
+    },
+    [userData]
+  );
 
   const handleLikeBtn = async () => {
     if (userData) {
@@ -79,13 +82,13 @@ const ShowDetail = () => {
     }
   };
   return showData.data ? (
-    <div className="pb-2 flex justify-center px-4">
+    <div className="pb-2 flex justify-center px-4 -mt-14 ">
       <img
         src={showData.data.image.medium}
         alt="cover"
         className="absolute w-full blur-lg h-full object-cover object-top brightness-50"
       />
-      <div className="max-w-5xl flex flex-col gap-2 relative backdrop-blur-3xl p-6 rounded-lg shadow-2xl">
+      <div className="max-w-5xl flex flex-col gap-2 relative backdrop-blur-3xl p-6 rounded-lg shadow-2xl mt-20">
         <div className="flex justify-between">
           <div className="flex flex-col gap-4">
             <div className="text-5xl font-serif">{showData.data.name}</div>
@@ -127,7 +130,7 @@ const ShowDetail = () => {
                 }}
               ></p>
             </div>
-            <div className="flex gap-4 shadow p-2 rounded-full  ">
+            <div className="flex gap-4 shadow-xl border-gray  p-2 rounded-full  ">
               <button
                 onClick={() =>
                   handleOnFavClick(
@@ -176,6 +179,7 @@ const ShowDetail = () => {
             castData={castData}
             seasonData={seasonData}
             imageData={imageData}
+            episodeData={episodeData}
           />
         </div>
       </div>

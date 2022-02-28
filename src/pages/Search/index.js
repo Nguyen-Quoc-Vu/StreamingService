@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
-import CardList from "../../components/CardList";
+import CardList from "../../components/Shared/CardList";
 import { useFetch } from "../../hooks/useFetch";
 
 const Search = () => {

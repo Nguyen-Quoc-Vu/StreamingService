@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import CardList from "../../components/CardList";
+import CardList from "../../components/Shared/CardList";
 import Avatar from "../../components/User/Avatar";
 import Button from "../../components/User/Button";
 import Info from "../../components/User/Info";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import NoImg from "../../assets/no-img.png";
-import CardList from "../../components/CardList";
+import CardList from "../../components/Shared/CardList";
 import FriendCard from "../../components/Profile/FriendCard";
 
 export const Profile = () => {

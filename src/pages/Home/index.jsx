@@ -1,5 +1,5 @@
 import React from "react";
-import CardList from "../../components/CardList";
+import CardList from "../../components/Shared/CardList";
 import { useFetch } from "../../hooks/useFetch";
 import { SCHEDULE_URL } from "../../utils/constant";
 import { getYesterdayDate } from "../../utils/functions";
