@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   auth,
   logInWithEmailAndPassword,
   signInWithGoogle,
 } from "../../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+import { setPage } from "../../redux/actions/page";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,14 +19,17 @@ export const Login = () => {
     if (user) navigate("/");
   }, [user, navigate]);
 
-  const handleEnterPress = (key) =>
-  {
-    console.log(key)
-    if(key==="Enter")
-    {
+  const handleEnterPress = (key) => {
+    console.log(key);
+    if (key === "Enter") {
       logInWithEmailAndPassword(email, password);
     }
-  }
+  };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setPage(null));
+  }, [dispatch]);
 
   return loading ? (
     <div>loading</div>
@@ -45,7 +50,7 @@ export const Login = () => {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onKeyPress={(e)=>handleEnterPress(e.key)}
+              onKeyPress={(e) => handleEnterPress(e.key)}
             />
           </div>
           <div className="mb-4">
@@ -61,13 +66,13 @@ export const Login = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              onKeyPress={(e)=>handleEnterPress(e.key)}
+              onKeyPress={(e) => handleEnterPress(e.key)}
             />
             <p className="text-red-500 text-xs italic">{errorMessage}</p>
           </div>
           <div className="flex items-center justify-between mb-4">
             <button
-              className="bg-gray-100 hover:bg-gray-200 w-full text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-gray-100 hover:bg-gray-200 w-full text-black bg-opacity-50 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
               onClick={() => signInWithGoogle(email, password)}
             >

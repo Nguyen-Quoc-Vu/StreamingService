@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import ReactGA from "react-ga";
 //import { getAnalytics } from "firebase/analytics";
 import {
   GoogleAuthProvider,
@@ -40,6 +41,13 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
+
+const createAccountTracker = () => {
+  ReactGA.event({
+    category: "User",
+    action: "Created an account",
+  });
+};
 
 const signInWithGoogle = async () => {
   try {
@@ -95,6 +103,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       photoURL: user.photoURL,
       email,
     });
+    createAccountTracker();
   } catch (err) {
     console.error(err);
     alert(err.message);

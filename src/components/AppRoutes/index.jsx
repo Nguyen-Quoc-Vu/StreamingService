@@ -11,7 +11,9 @@ import { SignIn } from "../../pages/SignIn";
 import FindFriend from "../../pages/FindFriend";
 import User from "../../pages/User/User";
 import Credits from "../../pages/Credits";
+import usePageTracking from "../../hooks/usePageTracking";
 const AppRoutes = () => {
+  usePageTracking();
   return (
     <div className="min-h-screen w-full mb-8">
       <Routes>

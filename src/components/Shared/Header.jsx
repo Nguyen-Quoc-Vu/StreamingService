@@ -11,6 +11,7 @@ import SearchBar from "./SearchBar";
 
 export const Header = () => {
   const userData = useSelector((state) => state.userData);
+  const currentPage = useSelector((state) => state.currentPage);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,18 +60,26 @@ export const Header = () => {
       <nav
         className={`${
           isOpen ? "flex" : "hidden"
-        } md:flex flex-col md:flex-row gap-4 duration-75 w-full justify-between items-center font-bold text-xl text-gray-300 px-4 py-4`}
+        } md:flex flex-col md:flex-row gap-4  w-full justify-between items-center font-bold text-xl text-gray-300 px-4 py-4`}
       >
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
           <Link
-            className="cursor-pointer text-gray-200"
+            className={`cursor-pointer ${
+              currentPage === "home"
+                ? "text-blue-100 underline-offset-1 underline"
+                : "text-gray-400"
+            }`}
             to="/"
             onClick={() => setIsOpen(false)}
           >
             Home
           </Link>
           <Link
-            className="cursor-pointer text-gray-200"
+            className={`cursor-pointer transition-colors ${
+              currentPage === "show"
+                ? "text-blue-100 underline-offset-1 underline"
+                : "text-gray-400"
+            }`}
             to="/shows?page=1"
             onClick={() => setIsOpen(false)}
           >
@@ -78,7 +87,11 @@ export const Header = () => {
           </Link>
           {userData && (
             <Link
-              className="cursor-pointer text-gray-200"
+              className={`cursor-pointer transition-colors ${
+                currentPage === "myList"
+                  ? "text-blue-100 underline-offset-1 underline"
+                  : "text-gray-400"
+              }`}
               to="/mylist"
               onClick={() => setIsOpen(false)}
             >
@@ -86,7 +99,11 @@ export const Header = () => {
             </Link>
           )}
           <Link
-            className="cursor-pointer text-gray-200"
+            className={`cursor-pointer transition-colors ${
+              currentPage === "findFriend"
+                ? "text-blue-100 underline-offset-1 underline"
+                : "text-gray-400"
+            }`}
             to="/find-friend"
             onClick={() => setIsOpen(false)}
           >
@@ -113,7 +130,7 @@ export const Header = () => {
             </div>
           ) : (
             <Link
-              className="rounded-full font-bold flex justify-around items-center bg-opacity-50 bg-green-800 hover:bg-green-700 px-5 py-2 text-sm"
+              className="rounded-full font-bold flex justify-around items-center bg-green-600 shadow-lg shadow-green-500/50 px-5 py-2 text-sm"
               to="/login"
             >
               Login

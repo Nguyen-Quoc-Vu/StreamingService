@@ -32,7 +32,7 @@ const CardList = ({
   );
 
   return data ? (
-    <div className="flex  justify-center flex-col gap-4">
+    <div className="flex justify-center flex-col gap-4">
       <div className="flex justify-between items-center text-2xl rounded-md gap-4 ">
         <div className="font-bold text-gray-200 border-l-8 pl-2 border-yellow-400">
           {data.length !== 0 ? description : "Nothing to show"}
@@ -90,6 +90,7 @@ const CardList = ({
                   thumbnail={each.person.image}
                   actor={each.person.name}
                   character={each.character.name}
+                  characterThumbnail={each.character.image}
                 />
               );
             case "user":
@@ -106,7 +107,6 @@ const CardList = ({
           }
         })}
       </div>
-      {console.log(data.length, numberOfCard)}
       {data.length > numberOfCard && loadMoreBtn && (
         <button
           className="text-sm font-semibold border-2 border-gray-200 hover:bg-gray-700 w-1/2 px-8 py-2 rounded-full self-center"

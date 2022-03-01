@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import HeartIcon from "../../assets/icons/HeartIcon";
 import LikeIcon from "../../assets/icons/LikeIcon";
 import ActiveTab from "../../components/show/ActiveTab";
+import StarIcon from "../../assets/icons/StarIcon";
 import { ShowInfo } from "../../components/show/ShowInfo";
 import {
   getLikes,
@@ -82,16 +83,26 @@ const ShowDetail = () => {
     }
   };
   return showData.data ? (
-    <div className="pb-2 flex justify-center px-4 -mt-14 ">
+    <div className="pb-2 flex justify-center px-4 -mt-14">
       <img
         src={showData.data.image.medium}
         alt="cover"
-        className="absolute w-full blur-lg h-full object-cover object-top brightness-50"
+        className="absolute w-full blur-xl h-full object-cover object-top brightness-50 animate-pulse-slow transition-all"
       />
       <div className="max-w-5xl flex flex-col gap-2 relative backdrop-blur-3xl p-6 rounded-lg shadow-2xl mt-20">
         <div className="flex justify-between">
-          <div className="flex flex-col gap-4">
-            <div className="text-5xl font-serif">{showData.data.name}</div>
+          <div className="flex flex-col gap-4 w-full">
+            <div className="flex justify-between">
+              <div className="text-5xl font-serif">{showData.data.name}</div>
+              {showData.data.rating?.average && (
+                <div className="text-5xl flex gap-1 items-center">
+                  <StarIcon />
+                  <div>{showData.data.rating?.average}</div>
+                  <span className="text-2xl self-end">/10</span>
+                </div>
+              )}
+            </div>
+
             <div className="flex gap-2">
               {showData.data.type === "Scripted" ? (
                 showData.data.genres.map((each, index) => (
@@ -141,7 +152,7 @@ const ShowDetail = () => {
                     id
                   )
                 }
-                className={`w-1/2 mt-4 py-1 rounded-full flex justify-center ${
+                className={`w-1/2 mt-4 py-1 rounded-full flex justify-center hover:scale-110 transition ease-in-out ${
                   !userData && "hidden"
                 }`}
               >
@@ -149,22 +160,22 @@ const ShowDetail = () => {
               </button>
               <button
                 onClick={() => handleLikeBtn()}
-                className={`w-1/2 font-bold mt-4 py-1 rounded-full flex justify-center items-center gap-2`}
+                className={`w-1/2 font-bold mt-4 py-1 rounded-full flex justify-center items-center gap-2 hover:scale-110 transition ease-in-out`}
               >
                 <LikeIcon fill={isLiked} />
                 {like}
               </button>
             </div>
           </div>
-          <div className="text-gray-200 py-2 w-full flex justify-around font-bold rounded-md my-2 backdrop-blur-2xl">
+          <div className="text-gray-100 py-2 w-full flex flex-grow justify-around font-bold rounded-md my-2 backdrop-blur-2xl mt-8">
             {["Cast", "Season", "Gallery"].map((each, index) => {
               return (
                 <button
                   key={index}
                   className={
                     activeTab === each
-                      ? "text-gray-100 text-xl cursor-pointer font-bold"
-                      : "cursor-pointer font-semibold text-gray-400 hover:text-gray-300 duration-100"
+                      ? "text-white text-xl cursor-pointer font-bold border-b-2"
+                      : "cursor-pointer font-semibold text-gray-300 hover:text-gray-300 text-lg duration-100"
                   }
                   onClick={() => setActiveTab(each)}
                 >

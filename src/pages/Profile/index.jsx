@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import NoImg from "../../assets/no-img.png";
 import CardList from "../../components/Shared/CardList";
 import FriendCard from "../../components/Profile/FriendCard";
+import { useDispatch } from "react-redux";
+import { setPage } from "../../redux/actions/page";
 
 export const Profile = () => {
   const userData = useSelector((state) => state.userData);
@@ -10,6 +12,12 @@ export const Profile = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setPage(null));
+  }, [dispatch]);
 
   const Avatar = () => (
     <div className="w-28 h-28 flex m-3text-white">

@@ -22,7 +22,7 @@ const SearchBar = () => {
   return (
     <div className="relative mx-auto text-gray-200">
       <input
-        className="border-2 border-gray-700 bg-gray-700 h-10 px-5 pr-16 rounded-full text-sm focus:outline-none bg-opacity-50"
+        className="border-2 border-gray-700 transition-all outline-none bg-gray-500 h-10 px-5 pr-16 rounded-full text-sm focus:outline-gray-500 bg-opacity-50"
         name="search"
         placeholder="Search"
         value={search}

@@ -3,7 +3,7 @@ import React from "react";
 const StarIcon = () => {
   return (
     <svg
-      className="h-5 w-5 text-yellow-500"
+      className="h-7 w-7 text-yellow-500"
       width="24"
       height="24"
       viewBox="0 0 24 24"

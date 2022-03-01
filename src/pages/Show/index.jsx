@@ -3,10 +3,17 @@ import { useSearchParams } from "react-router-dom";
 import CardList from "../../components/Shared/CardList";
 import Filter from "../../components/Filter";
 import { useFetch } from "../../hooks/useFetch";
+import { useDispatch } from "react-redux";
+import { setPage } from "../../redux/actions/page";
 
 export const Show = () => {
   const [searchParams] = useSearchParams();
   const STEP = 20;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setPage("show"));
+  }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

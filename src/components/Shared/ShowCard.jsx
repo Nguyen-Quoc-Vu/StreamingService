@@ -47,7 +47,7 @@ const ShowCard = ({ thumbnail, name, description, id }) => {
         <img
           src={thumbnail ? thumbnail : NoImg}
           alt=""
-          className="cursor-pointer rounded-lg object-cover object-center w-full h-full bg-gray-700"
+          className="cursor-pointer rounded-lg object-cover object-center w-full h-full bg-gray-700 shadow-lg transition-all hover:shadow-indigo-700/30"
           onClick={() => handleOnCardClick(id)}
         />
         {userData && (
