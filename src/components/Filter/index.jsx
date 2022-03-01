@@ -29,7 +29,6 @@ const Filter = ({ setFilterList, allShow }) => {
     }
     if (rating !== "") {
       const [lowest, highest] = rating.split("-");
-      console.log(lowest);
       newData = newData.filter(
         (each) => each.rating.average >= lowest && each.rating.average < highest
       );

@@ -4,17 +4,19 @@ import CardList from "../../components/Shared/CardList";
 import { useFetch } from "../../hooks/useFetch";
 import { setPage } from "../../redux/actions/page";
 import { SCHEDULE_URL } from "../../utils/constant";
-import { getYesterdayDate } from "../../utils/functions";
+import { getLastYearDate, getYesterdayDate } from "../../utils/functions";
 
 const Home = () => {
   const scheduleData = useFetch(SCHEDULE_URL);
-  const dispatch = useDispatch();
   const yesterdayScheduleData = useFetch(
-    SCHEDULE_URL + `?date=${getYesterdayDate()}`
+    SCHEDULE_URL + `?date=${getLastYearDate()}`
   );
+
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setPage("home"));
   }, [dispatch]);
+
   return (
     <div className="flex flex-col gap-8 px-4 max-w-5xl mx-auto">
       <CardList

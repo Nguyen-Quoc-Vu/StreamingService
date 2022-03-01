@@ -11,9 +11,7 @@ const FriendCard = ({ friendID }) => {
     try {
       const data = await getUserData(friendID);
       setFriendData(data);
-    } catch (e) {
-      console.log(friendData);
-    }
+    } catch (e) {}
   };
   useState(() => {
     fetchData();
@@ -28,7 +26,7 @@ const FriendCard = ({ friendID }) => {
       onClick={onCardClick}
       className="flex flex-col gap-2 items-center hover:bg-gray-700 rounded-md cursor-pointer duration-150 p-2"
     >
-     <Avatar userData={friendData}/>
+      <Avatar userData={friendData} />
       <div className="font-bold">{friendData.name}</div>
     </div>
   ) : null;

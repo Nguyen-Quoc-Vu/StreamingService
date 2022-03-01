@@ -54,7 +54,6 @@ const Gallery = ({ imageData }) => {
 };
 
 const Season = ({ seasonData, episodeData }) => {
-  console.log(seasonData);
   return (
     seasonData && (
       <div className="w-full">
@@ -72,15 +71,15 @@ const Season = ({ seasonData, episodeData }) => {
               <div className="font-semibold text-2xl">Season {each.number}</div>
               <div>
                 <span className="font-bold">Premiere date: </span>
-                {each.premiereDate}
+                {each.premiereDate ? each.premiereDate : "Unknown"}
               </div>
               <div>
                 <span className="font-bold">End date: </span>
-                {each.endDate}
+                {each.endDate ? each.endDate : "Unknown"}
               </div>
               <div>
                 <span className="font-bold">Network: </span>
-                {each.network?.name}
+                {each.network ? each.network.name : "Unknown"}
               </div>
             </div>
           </div>

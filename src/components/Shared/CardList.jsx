@@ -46,9 +46,10 @@ const CardList = ({
                 <ShowCard
                   key={index}
                   name={each.show.name}
-                  description={each.rating?.average}
+                  description={each.name}
                   thumbnail={each.show.image?.medium}
                   id={each.show.id}
+                  showDescription={true}
                 />
               );
             case "searchShow": {

@@ -133,7 +133,7 @@ const ShowDetail = () => {
             <ShowInfo {...showData.data} />
             <div className="text-justify w-full md:w-5/5">
               <div className="font-bold border-t border-gray-200 mt-2 pt-2 ">
-                Description
+                Summary:
               </div>
               <p
                 dangerouslySetInnerHTML={{
